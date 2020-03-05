@@ -1,1 +1,2 @@
 # numerical-analysis
+Timothy Sauer
