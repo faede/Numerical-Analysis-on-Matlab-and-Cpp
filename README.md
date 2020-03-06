@@ -1,2 +1,3 @@
 # numerical-analysis
-Timothy Sauer
+Timothy Sauer  ---.m 
+my             ---.cpp
