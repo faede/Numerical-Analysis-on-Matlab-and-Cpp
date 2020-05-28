@@ -1,5 +1,4 @@
-function X = SOR( a,b,x0,e )
-w=1.2;
+function X = GaussSeidel( a,b,x0,e )
 if size(b,2)~=1
     b=b';
 end
@@ -9,12 +8,13 @@ end
 D=diag(diag(a));
 L=-tril(a-D);
 U=-triu(a-D);
-M=(D-w*L)\((1-w)*D+w*U);
-g=(D-w*L)\(w*b);
+M=(D-L)\U;
+g=(D-L)\b;
 x1=M*x0+g;
 while norm((x1-x0),2)>e
     x0=x1;
     x1=M*x0+g;
 end
 X=x1;
+
 end

@@ -1,17 +1,23 @@
-function [L U]=LU_Crout(A)
-m=length(A);
-L=zeros(size(A));
-U=zeros(size(A));
-L(:,1)=A(:,1);
-U(1,:)=A(1,:)/L(1,1);
-U(1,1)=1;
-for k=2:m
-for j=2:m
-    for i=j:m
-        L(i,j)=A(i,j)-dot(L(i,1:j-1),U(1:j-1,j));
-    end
-    U(k,j)=(A(k,j)-dot(L(k,1:k-1),U(1:k-1,j)))/L(k,k);
-end
-end
-L
-U
+function LU_Crout(A,b,n)
+a = [A,b];
+l = zeros(n,n);
+u = zeros(n,n);
+z = zeros(n,1);
+x = zeros(n,1);
+l(1,1) = a(1,1);
+u(1,2) = a(1,2)/l(1,1);
+z(1) = a(1,n+1)/l(1,1);
+for i =2 : n-1
+  l(i,i-1) = a(i,i-1);
+  l(i,i) = a(i,i)-l(i,i-1)*u(i-1,i);
+  u(i,i+1) = a(i,i+1)/l(i,i);
+  z(i) = (a(i,n+1)-l(i,i-1)*z(i-1))/l(i,i);
+endfor
+l(n,n-1) = a(n,n-1);
+l(n,n) = a(n,n) - l(n,n-1)*u(n-1,n);
+z(n) = (a(n,n+1)-l(n,n-1)*z(n-1))/l(n,n);
+x(n)=z(n);
+for i = n-1:-1:1
+  x(i) = z(i) - u(i,i+1)*x(i+1);
+endfor
+x
