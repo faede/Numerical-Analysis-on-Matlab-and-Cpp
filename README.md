@@ -1,13 +1,13 @@
 # Numerical-Analysis
 
 # Include
-* bitsect
-* fpi
-* regularfalsi
+* Bitsect
+* Fpi
+* Regularfalsi
 * Newton
 * m-Newton
 * Scant method
-* muller method
+* Muller method
 * Romberg integration
 * Euller method
 * Modified Euller method
